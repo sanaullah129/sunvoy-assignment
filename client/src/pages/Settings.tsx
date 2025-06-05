@@ -94,10 +94,6 @@ const Settings = () => {
             </button>
           </div>
         </div>
-        <script>
-          window.REMOTE_API_URL = "https://api.challenge.sunvoy.com";
-        </script>
-        <script src="/js/settings.fefd531f237bcd266fc9.js"></script>
       </div>
     )
   )
