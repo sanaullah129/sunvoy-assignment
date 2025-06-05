@@ -1,5 +1,7 @@
+import type { FC } from "react"
+import type { ICardProps } from "../types/ITypes"
 
-const UserCard = ({ user }: any) => {
+const UserCard: FC<ICardProps> = ({ user }) => {
 
     return (
         <div className="bg-white p-4 rounded-lg shadow">

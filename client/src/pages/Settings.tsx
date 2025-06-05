@@ -1,8 +1,9 @@
 import { useContext, useEffect, useState } from 'react'
 import { RouteContext } from '../context/RouterContext';
+import type { IUser } from '../types/ITypes';
 
 const Settings = () => {
-  const [userInfo, setUserInfo] = useState<any>(null);
+  const [userInfo, setUserInfo] = useState<IUser | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const { navigate } = useContext(RouteContext);
   const [isUnAuthenticated, setIsUnAuthenticated] = useState<boolean>(false);
@@ -23,7 +24,11 @@ const Settings = () => {
       });
       const data = await response.json();
       if (!response.ok) {
-        if(data?.message === "Unauthorized") return setIsUnAuthenticated(true);
+        if(data?.message === "Unauthorized") {
+          localStorage.removeItem("sunvoy-token");
+          setIsUnAuthenticated(true);
+          return;
+        }
         alert(`Error fetching user info: ${data.message}`);
         return;
       }

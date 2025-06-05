@@ -1,10 +1,11 @@
 import { useContext, useEffect, useState } from 'react'
 import UserCard from '../components/UserCard';
 import { RouteContext } from '../context/RouterContext';
+import type { IUser } from '../types/ITypes';
 
 const UserList = () => {
 
-  const [userList, setUserList] = useState([]);
+  const [userList, setUserList] = useState<IUser[] | []>([]);
   const [error, setError] = useState<boolean>(false);
   const { navigate } = useContext(RouteContext);
   const [isUnAuthenticated, setIsUnAuthenticated] = useState<boolean>(false);
@@ -20,7 +21,11 @@ const UserList = () => {
       });
       const data = await response.json();
       if (!response.ok) {
-        if(data?.message === "Unauthorized") return setIsUnAuthenticated(true);
+        if (data?.message === "Unauthorized") {
+          localStorage.removeItem("sunvoy-token");
+          setIsUnAuthenticated(true);
+          return;
+        }
         alert(`Error fetching users: ${data.message}`);
         setError(true);
         return;
@@ -42,7 +47,7 @@ const UserList = () => {
     fetchUsers();
   }, []);
 
-  if(isUnAuthenticated)  return <div className="m-2">Unauthorized</div>
+  if (isUnAuthenticated) return <div className="m-2">Unauthorized</div>
   if (error) return <div>Error fetching users. Please try again later.</div>
   if (!userList || userList.length === 0) return <div>Loading...</div>
 

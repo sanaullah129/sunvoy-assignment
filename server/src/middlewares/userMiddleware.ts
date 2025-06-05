@@ -22,7 +22,6 @@ export class UserMiddleware {
                 return res.status(400).json({ message: "Request body is required" });
             }
             const { email = "", password = "" } = req.body;
-            console.log("Email:", email, "Password:", password);
             if (!email || !password) {
                 return res.status(400).json({ message: "Email and password are required" });
             }

@@ -8,7 +8,7 @@ export class SettingsMiddleware {
         this._settingsController = new SettingsController();
     }
 
-    public async fetchUserInfo(req: Request, res: Response, next: NextFunction): Promise<Response> {
+    public async fetchUserInfo(req: Request, res: Response): Promise<Response> {
         try {
             await this._settingsController.fetchUserInfo(res);
         } catch (error) {
