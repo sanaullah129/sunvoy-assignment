@@ -8,17 +8,15 @@ export class UserMiddleware {
         this._userController = new UserController();
     }
 
-    public async fetchUsers(req: Request, res: Response, next: NextFunction): Promise<Response> {
+    public async fetchUsers(req: Request, res: Response): Promise<Response> {
         try {
             await this._userController.getUsers(req, res);
-            next();
-
         } catch (error) {
             return res.status(500).json({ message: "Error fetching users" });
         }
     }
 
-    public async login(req: Request, res: Response, next: NextFunction): Promise<Response> {
+    public async login(req: Request, res: Response): Promise<Response> {
         try {
             if (!req.body) {
                 return res.status(400).json({ message: "Request body is required" });
@@ -29,7 +27,6 @@ export class UserMiddleware {
                 return res.status(400).json({ message: "Email and password are required" });
             }
             await this._userController.login(req.body, res);
-            next();
 
         } catch (error) {
             console.error("Error during login:", error);
