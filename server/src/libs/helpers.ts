@@ -14,6 +14,8 @@ export const validateToken = (req: Request, res: Response, next: NextFunction): 
     }
 
     if (tokenObj.expDate && new Date(tokenObj.expDate) < new Date()) {
+        tokenObj.token = "";
+        tokenObj.expDate = null;
         res.status(401).json({ message: unauthorizedMsg });
         return;
     }

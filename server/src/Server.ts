@@ -2,7 +2,7 @@ import express, { Express } from "express";
 import router from "./router";
 import cors from 'cors';
 import { API_PREFIX } from "./libs/constants";
-
+import bodyParser from "body-parser";
 export class Server {
     private app: Express;
 
@@ -15,8 +15,14 @@ export class Server {
     }
 
     public bootstrap(): void {
+        this.setUpBodyParser();
         this.setUpCors();
         this.setupRoutes();
+    }
+
+    public setUpBodyParser(): void {
+        this.app.use(bodyParser.json());
+        this.app.use(bodyParser.urlencoded({ extended: true }));
     }
 
     public setupRoutes(): void {
