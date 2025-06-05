@@ -9,7 +9,9 @@ const settingsMiddleware = new SettingsMiddleware()
 
 router.post("/login", userMiddleware.login.bind(userMiddleware));
 
-router.use((req: Request, res: Response, next: NextFunction) => validateToken(req, res, next));
+router.use((req: Request, res: Response, next: NextFunction) => {
+	validateToken(req, res, next);
+});
 
 router.get("/", userMiddleware.fetchUsers.bind(userMiddleware));
 router.get("/settings", settingsMiddleware.fetchUserInfo.bind(settingsMiddleware));

@@ -1,4 +1,4 @@
-import { SettingsController } from "../controllers/SettingsController";
+import { SettingsController } from "../controllers/settingsController";
 import { NextFunction, Request, Response } from "express";
 
 export class SettingsMiddleware {
