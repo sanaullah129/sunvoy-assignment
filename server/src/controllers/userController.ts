@@ -14,6 +14,10 @@ export class UserController {
     public async login(body: any, res: Response) {
         try {
             const { email, password } = body;
+            console.log("Login attempt with email:", email, " and password:", password);
+            console.log("Current user details:", userDetails);
+            tokenObj.token = "";
+            tokenObj.expDate = null;
             if (userDetails.email !== email || userDetails.password !== password) {
                 return res.status(401).json({ message: "Invalid credentials" });
             }

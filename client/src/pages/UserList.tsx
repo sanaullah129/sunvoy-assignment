@@ -31,7 +31,6 @@ const UserList = () => {
         return;
       }
       setUserList(data);
-      console.log("Fetched users:", data);
     }
     catch (error) {
       alert("Something went wrong. Please try again later.");
